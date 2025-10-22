@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription – New Vision Group</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="image/logo.png" alt="Logo New Vision Group" class="logo">
+      <h1>
+        <span class="new">NEW</span>
+        <span class="vision">VISION</span>
+        <span class="group">GROUP</span>
+      </h1>
+      <p>Formulaire de préinscription aux cours de maison</p>
+    </header>
+
+    <form id="inscriptionForm" action="https://formsubmit.co/chaibouharounaillia99@gmail.com" method="POST">
+      <label>Nom :</label>
+      <input type="text" name="nom" required>
+
+      <label>Prénom :</label>
+      <input type="text" name="prenom" required>
+
+      <label>Cycle :</label>
+      <select name="cycle" required>
+        <option value="">-- Choisir un cycle --</option>
+        <option>Primaire</option>
+        <option>Collège</option>
+        <option>Lycée</option>
+      </select>
+
+      <label>Matières :</label>
+      <input type="text" name="matiere" placeholder="Ex : Maths, PC, Français..." required>
+
+      <label>Téléphone :</label>
+      <input type="tel" name="telephone" required>
+
+      <button type="submit">Valider l’inscription</button>
+      <a href="index.html" class="btn-retour">Retour</a>
+      <!-- ✅ Message de confirmation -->
+    <div id="successMessage" class="success-message">
+      ✅ Merci ! Votre préinscription a bien été envoyée.  
+      Nous vous contacterons très bientôt.
+    </div>
+
+    <div class="contact-links">
+      <h3>Contactez-nous :</h3>
+      <a href="https://wa.me/22799198793" target="_blank">📱 WhatsApp</a>
+      <a href="mailto:chaibouharounaillia99@gmail.com" target="_blank">✉️ Gmail</a>
+    </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('preinscriptionForm');
+    const button = document.getElementById('submitBtn');
+    const btnText = document.querySelector('.btn-text');
+    const loader = document.querySelector('.loader');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Empêche le rechargement
+
+      btnText.style.display = 'none';
+      loader.style.display = 'inline-block';
+      button.disabled = true;
+
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      loader.style.display = 'none';
+      btnText.textContent = "✔️ Envoyé avec succès";
+      btnText.style.display = 'inline';
+      button.style.backgroundColor = '#28a745';
+
+      if (response.ok) {
+        successMessage.style.display = 'block';
+        form.reset();
+      } else {
+        successMessage.style.display = 'block';
+        successMessage.textContent = "❌ Erreur : veuillez réessayer plus tard où bien contactons-nous sur WhatsApp.";
+        successMessage.style.backgroundColor = "#ffcccc";
+      }
+    });
+  </script>
+</body>
+</html>
