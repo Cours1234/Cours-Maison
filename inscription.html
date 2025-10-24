@@ -46,27 +46,21 @@
       ✅ Merci ! Votre préinscription a bien été envoyée.  
       Nous vous contacterons très bientôt.
     </div>
-
+    </form>
     <div class="contact-links">
       <h3>Contactez-nous :</h3>
       <a href="https://wa.me/22799198793" target="_blank">📱 WhatsApp</a>
       <a href="mailto:chaibouharounaillia99@gmail.com" target="_blank">✉️ Gmail</a>
     </div>
-    </form>
   </div>
 
   <script>
     const form = document.getElementById('preinscriptionForm');
-    const button = document.getElementById('submitBtn');
-    const btnText = document.querySelector('.btn-text');
-    const loader = document.querySelector('.loader');
     const successMessage = document.getElementById('successMessage');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault(); // Empêche le rechargement
 
-      btnText.style.display = 'none';
-      loader.style.display = 'inline-block';
       button.disabled = true;
 
       const response = await fetch(form.action, {
